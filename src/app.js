@@ -12,12 +12,11 @@ const publicRoutes = require("./routes/publicRoutes");
 const { notFound, errorHandler } = require("./middleware/errorHandler");
 
 const app = express();
-app.use(sanitizeInput);
 
 const allowedOrigins = [
   process.env.DASHBOARD_ORIGIN,
   process.env.PORTFOLIO_ORIGIN,
-];
+].filter(Boolean);
 
 app.use(helmet());
 app.use(
@@ -28,6 +27,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+app.use(sanitizeInput);
 app.use(morgan(process.env.NODE_ENV === "development" ? "dev" : "combined"));
 
 // General API rate limit
