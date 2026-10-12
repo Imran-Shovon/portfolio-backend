@@ -12,14 +12,31 @@ const envSchema = z.object({
     .default("7d"),
   COOKIE_DOMAIN: z.string().default(""),
   ADMIN_ORIGIN: z.url().default("http://localhost:3001"),
-  PUBLIC_BASE_URL: z.url().default("http://localhost:4000"),
+  // On Render, RENDER_EXTERNAL_URL (https://<service>.onrender.com) is set automatically.
+  PUBLIC_BASE_URL: z.url().default(process.env.RENDER_EXTERNAL_URL || "http://localhost:4000"),
   UPLOAD_DIR: z.string().min(1).default("uploads"),
+  /** "local": files on disk under UPLOAD_DIR (dev). "cloudinary": files survive redeploys (production). */
+  STORAGE_DRIVER: z.enum(["local", "cloudinary"]).default("local"),
+  /** cloudinary://<api_key>:<api_secret>@<cloud_name>, from the Cloudinary dashboard. */
+  CLOUDINARY_URL: z
+    .string()
+    .default("")
+    .refine(v => v === "" || /^cloudinary:\/\/[^:]+:[^@]+@[\w-]+$/.test(v), "Must look like cloudinary://<api_key>:<api_secret>@<cloud_name>"),
+  CLOUDINARY_FOLDER: z.string().regex(/^[\w-]+$/).default("portfolio"),
+  /** Public URL of the first website, used by `npm run seed` for siteUrl / allowed origin / revalidate URL. */
+  SEED_SITE_URL: z.url().default("http://localhost:3000"),
   TRUST_PROXY: z.coerce.number().int().min(0).default(0),
   ADMIN_EMAIL: z.string().default(""),
   ADMIN_PASSWORD: z.string().default(""),
 });
 
-const parsed = envSchema.safeParse(process.env);
+const parsed = envSchema
+  // Hosting dashboards often store unset variables as "", which should mean "use the default".
+  .refine(v => v.STORAGE_DRIVER !== "cloudinary" || v.CLOUDINARY_URL !== "", {
+    path: ["CLOUDINARY_URL"],
+    message: "Required when STORAGE_DRIVER=cloudinary",
+  })
+  .safeParse(Object.fromEntries(Object.entries(process.env).filter(([, v]) => v !== "")));
 
 if (!parsed.success) {
   console.error("Invalid environment configuration:");

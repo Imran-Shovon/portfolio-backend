@@ -10,6 +10,7 @@
  * Text that lived in JSX (Hero, About, Contact, Footer, PageLoader, layout metadata) is below.
  */
 import { readFileSync } from "node:fs";
+import { env } from "@/config/env";
 
 interface Snapshot {
   projects: { title: string; type: string; duration: string; image: string; summary: string; description: string; tech: string[]; accent: string; live: string; github: string }[];
@@ -31,12 +32,15 @@ const CSS_VAR_HEX: Record<string, string> = {
 };
 const hex = (color: string) => CSS_VAR_HEX[color] ?? color;
 
+/** SEED_SITE_URL decides where the website lives (http://localhost:3000 locally, the Vercel URL in production). */
+const siteOrigin = new URL(env.SEED_SITE_URL).origin;
+
 export const seedSite = {
   name: "Shovon Portfolio",
   slug: "shovon",
-  siteUrl: "http://localhost:3000",
-  allowedOrigins: ["http://localhost:3000"],
-  revalidateUrl: "http://localhost:3000/api/revalidate",
+  siteUrl: siteOrigin,
+  allowedOrigins: [siteOrigin],
+  revalidateUrl: `${siteOrigin}/api/revalidate`,
 };
 
 export const seedProfile = {

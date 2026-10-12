@@ -1,0 +1,32 @@
+# Render Blueprint: Dashboard → New → Blueprint → pick this repo.
+# Variables marked `sync: false` are asked for once when the Blueprint is created.
+services:
+  - type: web
+    name: portfolio-api
+    runtime: node
+    plan: free # sleeps after 15 min idle; "starter" stays awake
+    region: singapore
+    branch: main
+    autoDeploy: true
+    # devDependencies (typescript, tsc-alias) are needed to build, and NODE_ENV=production would skip them.
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI # MongoDB Atlas connection string
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_ORIGIN # admin dashboard URL, e.g. https://portfolio-admin.vercel.app
+        sync: false
+      - key: TRUST_PROXY # Render's load balancer
+        value: "1"
+      - key: STORAGE_DRIVER
+        value: cloudinary
+      - key: CLOUDINARY_URL # cloudinary://<api_key>:<api_secret>@<cloud_name>
+        sync: false
+      # PUBLIC_BASE_URL defaults to Render's RENDER_EXTERNAL_URL.

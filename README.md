@@ -3,6 +3,10 @@
 Content API for the portfolio websites and the admin dashboard (`../portfolio-admin`).
 Express 5 + TypeScript + MongoDB. One API serves many sites; each site's content is isolated.
 
+## Deploy
+
+Render + MongoDB Atlas + Cloudinary, step by step: see [DEPLOY.md](DEPLOY.md).
+
 ## Run locally
 
 ```bash

@@ -1,18 +1,12 @@
-import { mkdir, rm, unlink, writeFile } from "node:fs/promises";
-import path from "node:path";
-import { nanoid } from "nanoid";
 import { env } from "@/config/env";
 import { AppError } from "@/lib/AppError";
-import { logger } from "@/lib/logger";
+import { cloudinaryDriver } from "@/lib/storage/cloudinary";
+import { localDriver } from "@/lib/storage/local";
+import type { FileKind, StorageDriver } from "@/lib/storage/types";
+
+export { ownedFilePath, UPLOAD_ROOT } from "@/lib/storage/local";
 
 const MB = 1024 * 1024;
-
-interface FileKind {
-  ext: string;
-  maxBytes: number;
-  /** Checks the file's leading bytes so a renamed file can't pass as another type. */
-  sniff: (b: Buffer) => boolean;
-}
 
 const ascii = (b: Buffer, start: number, text: string) => b.subarray(start, start + text.length).toString("latin1") === text;
 
@@ -27,12 +21,12 @@ export const FILE_KINDS: Record<string, FileKind> = {
 /** Largest allowed upload, used as multer's hard limit. */
 export const MAX_UPLOAD_BYTES = Math.max(...Object.values(FILE_KINDS).map(k => k.maxBytes));
 
-export const UPLOAD_ROOT = path.resolve(env.UPLOAD_DIR);
-const PUBLIC_PREFIX = `${env.PUBLIC_BASE_URL}/uploads/`;
+/** Chosen by STORAGE_DRIVER: local disk in development, Cloudinary in production. */
+const driver: StorageDriver = env.STORAGE_DRIVER === "cloudinary" ? cloudinaryDriver : localDriver;
 
 /**
- * Files live in `uploads/<siteId>/`. Folders are keyed by id rather than slug so renaming a
- * site never strands its files, and deleting a site can remove its folder in one go.
+ * Validates type, size and contents, then stores the file under the site's folder
+ * (keyed by id so renaming a site never strands its files). Returns the public URL.
  */
 export async function saveUpload(siteId: string, file: { buffer: Buffer; mimetype: string; size: number }) {
   const kind = FILE_KINDS[file.mimetype];
@@ -45,35 +39,12 @@ export async function saveUpload(siteId: string, file: { buffer: Buffer; mimetyp
   if (!kind.sniff(file.buffer)) {
     throw new AppError(415, "UNSUPPORTED_FILE", "The file's contents don't match its type");
   }
-
-  const dir = path.join(UPLOAD_ROOT, siteId);
-  const name = `${nanoid(16)}.${kind.ext}`;
-  await mkdir(dir, { recursive: true });
-  await writeFile(path.join(dir, name), file.buffer);
-  return `${PUBLIC_PREFIX}${siteId}/${name}`;
+  return driver.save(siteId, file.buffer, kind);
 }
 
-/** The local path of a file this service owns, or null for anything else (e.g. /image/... paths). */
-export function ownedFilePath(url: string): string | null {
-  let relative: string;
-  if (url.startsWith(PUBLIC_PREFIX)) relative = url.slice(PUBLIC_PREFIX.length);
-  else if (url.startsWith("/uploads/")) relative = url.slice("/uploads/".length);
-  else return null;
-
-  const resolved = path.resolve(UPLOAD_ROOT, relative);
-  // Refuse anything that escapes the upload folder (../ tricks).
-  return resolved.startsWith(UPLOAD_ROOT + path.sep) ? resolved : null;
-}
-
+/** Deletes a file this service stored. URLs it doesn't own (e.g. /image/... paths) are ignored. */
 export async function removeUpload(url: string | undefined | null) {
-  if (!url) return;
-  const file = ownedFilePath(url);
-  if (!file) return;
-  try {
-    await unlink(file);
-  } catch (err) {
-    if ((err as NodeJS.ErrnoException).code !== "ENOENT") logger.warn({ err, url }, "Could not delete upload");
-  }
+  if (url) await driver.remove(url);
 }
 
 /** Deletes files that a field pointed at before an update but no longer does. */
@@ -92,5 +63,5 @@ export async function removeReplacedUploads(
 }
 
 export async function removeSiteUploads(siteId: string) {
-  await rm(path.join(UPLOAD_ROOT, siteId), { recursive: true, force: true });
+  await driver.removeSite(siteId);
 }
