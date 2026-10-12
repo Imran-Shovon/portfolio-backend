@@ -1,5 +1,32 @@
 # Deploying the portfolio stack
 
+## Current production setup
+
+| Piece | Where | URL |
+|---|---|---|
+| Portfolio website | Vercel project `portfolio` | https://portfolio-five-iota-cwznbgwsf2.vercel.app |
+| Admin dashboard | Vercel project `portfolio-admin` | https://shovon-portfolio-admin.vercel.app |
+| Content API (this repo) | Vercel project `portfolio-api` (serverless, `api/index.js` + `vercel.json`) | https://shovon-portfolio-api.vercel.app |
+| Database | MongoDB Atlas, project `portfolio`, free M0 cluster `portfolio-db` (AWS Singapore) | — |
+| Uploads | Vercel Blob store `portfolio-uploads` (public, Singapore), `STORAGE_DRIVER=vercel-blob` | — |
+
+All three Vercel projects are connected to their GitHub repos and deploy `main` automatically.
+Preview deployments stay behind Vercel Authentication; only the domains above are public.
+
+API env vars (Vercel → portfolio-api): `MONGODB_URI`, `JWT_SECRET`, `NODE_ENV=production`, `TRUST_PROXY=1`,
+`STORAGE_DRIVER=vercel-blob`, `BLOB_READ_WRITE_TOKEN` (added by the Blob store), `ADMIN_ORIGIN`.
+Dashboard: `BACKEND_URL`. Portfolio: `CONTENT_API_URL`, `SITE_SLUG`, `REVALIDATE_SECRET`.
+
+Limits on Vercel: uploads are capped at 4 MB (Vercel's 4.5 MB request limit), and rate limits are
+counted per serverless instance. The public endpoint sends `Cache-Control: no-store`, so Vercel's
+CDN never serves the website stale content after a save.
+
+---
+
+## Alternative: Render + Cloudinary
+
+The steps below deploy the API on Render with Cloudinary uploads instead (`render.yaml`).
+
 | Piece | Host | Repo |
 |---|---|---|
 | Content API (this repo) | Render (web service, free plan) | `Imran-Shovon/portfolio-backend` |
