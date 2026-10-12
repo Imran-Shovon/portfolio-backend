@@ -2,7 +2,7 @@
 .env.*
 !.env.example
 .mongo-data/
-uploads/
+/uploads/
 node_modules/
 coverage/
 .deploy-secrets
