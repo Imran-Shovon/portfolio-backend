@@ -23,7 +23,7 @@ describe("public site endpoint", () => {
     const { app } = await setup();
     const res = await request(app).get("/api/v1/public/sites/pub").expect(200);
 
-    expect(res.headers["cache-control"]).toBe("public, max-age=60, stale-while-revalidate=300");
+    expect(res.headers["cache-control"]).toBe("no-store");
     expect(res.headers["access-control-allow-origin"]).toBe("*");
 
     const { data } = res.body;

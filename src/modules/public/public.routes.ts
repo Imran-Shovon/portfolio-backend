@@ -35,7 +35,9 @@ export function createPublicRouter(contactLimiter: RequestHandler) {
   const router = Router();
 
   router.get("/sites/:slug", openCors, loadSiteBySlug, async (req, res) => {
-    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
+    // Never cache at a CDN: websites cache this themselves and are told exactly when to refresh
+    // (revalidation webhook). A CDN copy (e.g. Vercel's edge) would hand them stale content.
+    res.set("Cache-Control", "no-store");
     res.json({ data: await getPublicContent(getSite(req)) });
   });
 

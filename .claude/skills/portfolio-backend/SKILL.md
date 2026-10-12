@@ -190,7 +190,7 @@ Response shapes the dashboard relies on:
 
 | Method | Path | Notes |
 |---|---|---|
-| GET | `/public/sites/:slug` | One aggregated payload: `{ site: { name, slug, sections }, profile, skillCategories, experiences, projects, education, publications }`. Only `published: true`, sorted by `order`. Disabled sections are returned as empty arrays (so consumers needn't null-check). 404 if the site is missing or inactive. Send `Cache-Control: public, max-age=60, stale-while-revalidate=300`. |
+| GET | `/public/sites/:slug` | One aggregated payload: `{ site: { name, slug, sections }, profile, skillCategories, experiences, projects, education, publications }`. Only `published: true`, sorted by `order`. Disabled sections are returned as empty arrays (so consumers needn't null-check). 404 if the site is missing or inactive. Send `Cache-Control: no-store`: websites cache it themselves and are revalidated on every save, and a CDN copy (Vercel caches `public, max-age` responses at the edge) would serve them stale content after a save. |
 | POST | `/public/sites/:slug/messages` | Contact form. Zod-validated, rate-limited (5 / 15 min / IP / site), honeypot field `website`: when filled, answer 201 but store nothing. `Origin` must be in the site's `allowedOrigins` (missing or foreign → 403). Returns 201. |
 | GET | `/health` | `{ status: "ok" }` (outside `/api/v1`) |
 
