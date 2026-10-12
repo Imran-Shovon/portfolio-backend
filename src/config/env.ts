@@ -13,16 +13,24 @@ const envSchema = z.object({
   COOKIE_DOMAIN: z.string().default(""),
   ADMIN_ORIGIN: z.url().default("http://localhost:3001"),
   // On Render, RENDER_EXTERNAL_URL (https://<service>.onrender.com) is set automatically.
-  PUBLIC_BASE_URL: z.url().default(process.env.RENDER_EXTERNAL_URL || "http://localhost:4000"),
+  PUBLIC_BASE_URL: z
+    .url()
+    .default(
+      process.env.RENDER_EXTERNAL_URL ||
+        (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:4000"),
+    ),
   UPLOAD_DIR: z.string().min(1).default("uploads"),
-  /** "local": files on disk under UPLOAD_DIR (dev). "cloudinary": files survive redeploys (production). */
-  STORAGE_DRIVER: z.enum(["local", "cloudinary"]).default("local"),
+  /** "local": files on disk under UPLOAD_DIR (dev). "vercel-blob" / "cloudinary": files survive redeploys (production). */
+  STORAGE_DRIVER: z.enum(["local", "vercel-blob", "cloudinary"]).default("local"),
+  /** Set automatically when a Vercel Blob store is connected to the project. */
+  BLOB_READ_WRITE_TOKEN: z.string().default(""),
   /** cloudinary://<api_key>:<api_secret>@<cloud_name>, from the Cloudinary dashboard. */
   CLOUDINARY_URL: z
     .string()
     .default("")
     .refine(v => v === "" || /^cloudinary:\/\/[^:]+:[^@]+@[\w-]+$/.test(v), "Must look like cloudinary://<api_key>:<api_secret>@<cloud_name>"),
-  CLOUDINARY_FOLDER: z.string().regex(/^[\w-]+$/).default("portfolio"),
+  /** Top-level folder for uploads in Vercel Blob / Cloudinary. */
+  STORAGE_FOLDER: z.string().regex(/^[\w-]+$/).default("portfolio"),
   /** Public URL of the first website, used by `npm run seed` for siteUrl / allowed origin / revalidate URL. */
   SEED_SITE_URL: z.url().default("http://localhost:3000"),
   TRUST_PROXY: z.coerce.number().int().min(0).default(0),
@@ -35,6 +43,10 @@ const parsed = envSchema
   .refine(v => v.STORAGE_DRIVER !== "cloudinary" || v.CLOUDINARY_URL !== "", {
     path: ["CLOUDINARY_URL"],
     message: "Required when STORAGE_DRIVER=cloudinary",
+  })
+  .refine(v => v.STORAGE_DRIVER !== "vercel-blob" || v.BLOB_READ_WRITE_TOKEN !== "", {
+    path: ["BLOB_READ_WRITE_TOKEN"],
+    message: "Required when STORAGE_DRIVER=vercel-blob (connect a Blob store to the Vercel project)",
   })
   .safeParse(Object.fromEntries(Object.entries(process.env).filter(([, v]) => v !== "")));
 

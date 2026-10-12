@@ -24,7 +24,7 @@ function client() {
 }
 
 const cloudName = () => new URL(env.CLOUDINARY_URL).hostname;
-const siteFolder = (siteId: string) => `${env.CLOUDINARY_FOLDER}/${siteId}`;
+const siteFolder = (siteId: string) => `${env.STORAGE_FOLDER}/${siteId}`;
 
 /**
  * Images are stored as Cloudinary "image" resources (CDN-optimized). PDFs are "raw" resources,
@@ -68,7 +68,7 @@ export const cloudinaryDriver: StorageDriver = {
   },
 
   async remove(url) {
-    const parsed = parseCloudinaryUrl(url, cloudName(), env.CLOUDINARY_FOLDER);
+    const parsed = parseCloudinaryUrl(url, cloudName(), env.STORAGE_FOLDER);
     if (!parsed) return;
     try {
       await client().uploader.destroy(parsed.publicId, { resource_type: parsed.resourceType, invalidate: true });

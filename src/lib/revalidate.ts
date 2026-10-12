@@ -1,9 +1,10 @@
+import { waitUntil } from "@vercel/functions";
 import { logger } from "@/lib/logger";
 import { SiteModel } from "@/modules/sites/site.model";
 
 const DEBOUNCE_MS = 500;
 const TIMEOUT_MS = 5000;
-const pending = new Map<string, NodeJS.Timeout>();
+const pending = new Set<string>();
 
 export interface RevalidateResult {
   ok: boolean;
@@ -31,18 +32,22 @@ export async function revalidateNow(siteId: string): Promise<RevalidateResult> {
 }
 
 /**
- * Fire-and-forget after an admin write. Debounced per site so a reorder or a burst of edits
- * sends one request. Admin requests never wait for or fail because of it.
+ * Fire-and-forget after an admin write: pings the website 500ms later, so a reorder or a burst
+ * of edits arriving in that window shares one request. Admin requests never wait for or fail
+ * because of it. `waitUntil` keeps a serverless function (Vercel) alive until the ping is done;
+ * on a long-running server it simply lets the promise run.
  */
 export function scheduleRevalidate(site: { _id: unknown; revalidateUrl?: string | null }) {
   if (!site.revalidateUrl) return;
   const siteId = String(site._id);
-  clearTimeout(pending.get(siteId));
-  pending.set(
-    siteId,
-    setTimeout(() => {
-      pending.delete(siteId);
-      void revalidateNow(siteId);
-    }, DEBOUNCE_MS).unref(),
+  if (pending.has(siteId)) return;
+  pending.add(siteId);
+  waitUntil(
+    new Promise(resolve => setTimeout(resolve, DEBOUNCE_MS))
+      .then(() => {
+        pending.delete(siteId);
+        return revalidateNow(siteId);
+      })
+      .catch(err => logger.warn({ err, siteId }, "Revalidation scheduling failed")),
   );
 }

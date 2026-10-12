@@ -28,3 +28,15 @@ describe("parseCloudinaryUrl (decides which files may be deleted)", () => {
     expect(parseCloudinaryUrl("http://localhost:4000/uploads/x/y.png", CLOUD, FOLDER)).toBeNull();
   });
 });
+
+describe("isOwnedBlobUrl (decides which Vercel Blob files may be deleted)", () => {
+  it("accepts this folder on Vercel Blob and nothing else", async () => {
+    const { isOwnedBlobUrl } = await import("@/lib/storage/vercelBlob");
+    const host = "https://abc123.public.blob.vercel-storage.com";
+    expect(isOwnedBlobUrl(`${host}/portfolio/64b0/x.png`, "portfolio")).toBe(true);
+    expect(isOwnedBlobUrl(`${host}/other/64b0/x.png`, "portfolio")).toBe(false);
+    expect(isOwnedBlobUrl(`${host}/portfolio/../x.png`, "portfolio")).toBe(false);
+    expect(isOwnedBlobUrl("https://evil.example/portfolio/x.png", "portfolio")).toBe(false);
+    expect(isOwnedBlobUrl("/image/project/ekyc.png", "portfolio")).toBe(false);
+  });
+});

@@ -2,27 +2,35 @@ import { env } from "@/config/env";
 import { AppError } from "@/lib/AppError";
 import { cloudinaryDriver } from "@/lib/storage/cloudinary";
 import { localDriver } from "@/lib/storage/local";
+import { vercelBlobDriver } from "@/lib/storage/vercelBlob";
 import type { FileKind, StorageDriver } from "@/lib/storage/types";
 
 export { ownedFilePath, UPLOAD_ROOT } from "@/lib/storage/local";
 
 const MB = 1024 * 1024;
+/** Vercel functions accept request bodies up to 4.5 MB, so uploads stay below that everywhere. */
+const MAX_FILE_MB = 4;
 
 const ascii = (b: Buffer, start: number, text: string) => b.subarray(start, start + text.length).toString("latin1") === text;
 
 export const FILE_KINDS: Record<string, FileKind> = {
-  "image/jpeg": { ext: "jpg", maxBytes: 5 * MB, sniff: b => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff },
-  "image/png": { ext: "png", maxBytes: 5 * MB, sniff: b => ascii(b, 1, "PNG") && b[0] === 0x89 },
-  "image/webp": { ext: "webp", maxBytes: 5 * MB, sniff: b => ascii(b, 0, "RIFF") && ascii(b, 8, "WEBP") },
-  "image/avif": { ext: "avif", maxBytes: 5 * MB, sniff: b => ascii(b, 4, "ftyp") && (ascii(b, 8, "avif") || ascii(b, 8, "avis")) },
-  "application/pdf": { ext: "pdf", maxBytes: 10 * MB, sniff: b => ascii(b, 0, "%PDF") },
+  "image/jpeg": { ext: "jpg", maxBytes: MAX_FILE_MB * MB, sniff: b => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff },
+  "image/png": { ext: "png", maxBytes: MAX_FILE_MB * MB, sniff: b => ascii(b, 1, "PNG") && b[0] === 0x89 },
+  "image/webp": { ext: "webp", maxBytes: MAX_FILE_MB * MB, sniff: b => ascii(b, 0, "RIFF") && ascii(b, 8, "WEBP") },
+  "image/avif": { ext: "avif", maxBytes: MAX_FILE_MB * MB, sniff: b => ascii(b, 4, "ftyp") && (ascii(b, 8, "avif") || ascii(b, 8, "avis")) },
+  "application/pdf": { ext: "pdf", maxBytes: MAX_FILE_MB * MB, sniff: b => ascii(b, 0, "%PDF") },
 };
 
 /** Largest allowed upload, used as multer's hard limit. */
 export const MAX_UPLOAD_BYTES = Math.max(...Object.values(FILE_KINDS).map(k => k.maxBytes));
 
-/** Chosen by STORAGE_DRIVER: local disk in development, Cloudinary in production. */
-const driver: StorageDriver = env.STORAGE_DRIVER === "cloudinary" ? cloudinaryDriver : localDriver;
+/** Chosen by STORAGE_DRIVER: local disk in development, Vercel Blob or Cloudinary in production. */
+const DRIVERS: Record<typeof env.STORAGE_DRIVER, StorageDriver> = {
+  local: localDriver,
+  "vercel-blob": vercelBlobDriver,
+  cloudinary: cloudinaryDriver,
+};
+const driver = DRIVERS[env.STORAGE_DRIVER];
 
 /**
  * Validates type, size and contents, then stores the file under the site's folder

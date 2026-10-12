@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+.mongo-data/
+uploads/
+node_modules/
+coverage/
+.deploy-secrets
