@@ -1,0 +1,497 @@
+{
+  "projects": [
+    {
+      "title": "Redlime Forge – Website Builder Platform",
+      "type": "Professional",
+      "duration": "Nov 2025 – Present",
+      "image": "/image/project/redlime-forge.png",
+      "summary": "An internal website builder platform at Redlime Solutions. Every client site below is built, configured and published from this panel.",
+      "description": "Redlime Forge is the website builder platform behind Redlime Solutions' client work. It is a single React application that powers many independent sites: each domain loads the same runtime and renders its own pages, branding and content. As a Frontend Developer, I work on the builder panel and the shared rendering engine, building reusable, animated page sections that client sites are composed from. Access to the panel itself is restricted to the team.",
+      "tech": [
+        "React",
+        "Vite",
+        "React Router",
+        "GSAP",
+        "Framer Motion"
+      ],
+      "accent": "#8b5cf6",
+      "live": "https://panel.redlimesolutions.com/",
+      "github": ""
+    },
+    {
+      "title": "Docmedilink",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/docmedilink.png",
+      "summary": "A telehealth website with the tagline \"Exceptional Care, Anywhere\", presenting services, a nationwide clinician network and patient login.",
+      "description": "Docmedilink is a telehealth brand offering cutting-edge virtual care through a nationwide network of expert providers. I built its marketing site on Redlime Forge, including the animated hero with hand-drawn illustration accents, gradient headline typography, and the Services, Clinicians, About and Contact pages.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "GSAP",
+        "Responsive UI"
+      ],
+      "accent": "#3b82f6",
+      "live": "https://docmedilink.com/",
+      "github": ""
+    },
+    {
+      "title": "ThriveWell Rx",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/thrivewellrx.png",
+      "summary": "A site for a white-label telehealth infrastructure provider that helps clinics, pharmacies and wellness brands launch digital health products.",
+      "description": "ThriveWell Rx provides end-to-end white-label telehealth infrastructure: technology, provider access, pharmacy fulfillment, compliance support and patient operations. I built the site on Redlime Forge, with a soft gradient hero, device mockups of the patient app, a Solutions menu, LegitScript and FAQ pages, and demo booking calls to action.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "GSAP",
+        "Responsive UI"
+      ],
+      "accent": "#06b6d4",
+      "live": "https://thrivewellrx.com/",
+      "github": ""
+    },
+    {
+      "title": "Dosevana",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/dosevana.png",
+      "summary": "A landing site for a done-for-you medical partnership that helps med spas, gyms and wellness businesses add wellness revenue.",
+      "description": "Dosevana (by ThriveWell) is a done-for-you medical partnership that gives wellness businesses, med spas and fitness centers HIPAA-compliant tech, a 50-state physician network and clinical protocols. I built the conversion-focused site on Redlime Forge, covering the hero, hand-drawn decorative accents, the Other Solutions menu, FAQ and the demo request flow.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "GSAP",
+        "Responsive UI"
+      ],
+      "accent": "#F59E0B",
+      "live": "https://dosevana.com/",
+      "github": ""
+    },
+    {
+      "title": "American Wellness Partners",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/american-wellness-partners.png",
+      "summary": "A site that pitches a turnkey GLP-1 and peptide clinic business model to prospective clinic owners.",
+      "description": "American Wellness Partners offers a complete turnkey business model, technical support and marketing for launching a cash-only GLP-1 and peptide clinic. I built the site on Redlime Forge, with a full-bleed photo hero and key selling points, plus sections for The Opportunity, Our Model, Onboarding, The Economics and FAQ, and territory availability and call booking calls to action.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "GSAP",
+        "Responsive UI"
+      ],
+      "accent": "#10B981",
+      "live": "https://americanwellnesspartners.com/",
+      "github": ""
+    },
+    {
+      "title": "Sanuma Taxation",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/sanuma-taxation.png",
+      "summary": "A dark, editorial-style site for an international tax and compliance advisory firm with offices across six countries.",
+      "description": "Sanuma Taxation Procedures Co. L.L.C is an international tax and compliance advisory firm. I built its site on Redlime Forge, with a serif \"Elegant & Simple\" hero, a scrolling news ticker, office cards with coordinates for six locations (Dubai, Sharjah, Toronto, Helsinki, Dhaka and Kuala Lumpur), and the About, Services, Blog, Career and Contact pages.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "GSAP",
+        "Responsive UI"
+      ],
+      "accent": "#F59E0B",
+      "live": "https://sanumaweb.redlimesolutions.com/",
+      "github": ""
+    },
+    {
+      "title": "Redlime Solutions",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/redlime-solutions.png",
+      "summary": "The corporate website for Redlime Solutions, with a full-screen video hero: \"Rejuvenating your business by reducing cost and delivering results that endure.\"",
+      "description": "The company website for Redlime Solutions, built on the firm's own Redlime Forge platform. It features a full-screen background video hero with layered typography, a transparent navigation bar, and the About the Firm, Services, Career and Contact pages.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "GSAP",
+        "Responsive UI"
+      ],
+      "accent": "#F43F5E",
+      "live": "https://redlimesolutions.com/",
+      "github": ""
+    },
+    {
+      "title": "RL Technologies Limited",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/rl-technologies.png",
+      "summary": "The website for RL Technologies Limited, a sister brand that reuses the Redlime Solutions layout with its own identity.",
+      "description": "RL Technologies Limited's website runs on Redlime Forge and shares its page structure with the Redlime Solutions site: a full-screen video hero, About the Firm, Services, Career and Contact. It is a good example of the platform's multi-brand reuse, since the same sections are restyled with a different logo, branding and content.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "GSAP",
+        "Responsive UI"
+      ],
+      "accent": "#F43F5E",
+      "live": "https://rltechltd.com/",
+      "github": ""
+    },
+    {
+      "title": "Redlime Grow",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/redlime-grow.png",
+      "summary": "A SaaS landing page for a client acquisition system: \"We don't just buy traffic, we build infrastructure.\"",
+      "description": "Redlime Grow is a growth and client acquisition service powered by automation and the client's own data. I built the landing page on Redlime Forge, with a dark hero over a glowing world network map, a free Growth Blueprint call to action, and the services, features and contact sections.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "GSAP",
+        "Responsive UI"
+      ],
+      "accent": "#10B981",
+      "live": "https://redlimegrow.com/",
+      "github": ""
+    },
+    {
+      "title": "QR Studio",
+      "type": "Professional",
+      "duration": "2025 – 2026",
+      "image": "/image/project/qr-studio.png",
+      "summary": "A browser-based QR code generator with custom colors, dot and corner styles, a center logo, and PNG/SVG export.",
+      "description": "QR Studio is a QR code generator that runs entirely in the browser. Users enter a URL and customize the foreground and background colors, export size, margin, dot style, corner style and error correction level, and can add an optional center logo. A live preview updates as they edit, codes export as high-resolution PNG or SVG with no watermark, and history is saved locally on the device.",
+      "tech": [
+        "React",
+        "Redlime Forge",
+        "QR Encoding",
+        "PNG/SVG Export"
+      ],
+      "accent": "#10B981",
+      "live": "https://qr.redlimesolutions.com/",
+      "github": ""
+    },
+    {
+      "title": "e-KYC – Electronic Know Your Customer",
+      "type": "Professional",
+      "duration": "Jan 2022 – Present",
+      "image": "/image/project/ekyc.png",
+      "summary": "A digital eKYC onboarding solution used across multiple banks. I built responsive Angular interfaces and assisted with deployment workflows and DevOps.",
+      "description": "As a Junior Software Engineer, I contributed to the development and maintenance of a digital eKYC (Electronic Know Your Customer) solution used across multiple banks. My responsibilities included implementing responsive user interfaces using Angular. I also assisted in deployment workflows and DevOps practices. This role strengthened my foundation in full-stack development and taught me the importance of security, scalability, and performance in financial applications.",
+      "tech": [
+        "Angular",
+        ".NET",
+        "SQL",
+        "Nebular",
+        "Bootstrap"
+      ],
+      "accent": "#3b82f6",
+      "live": "https://eaccount.bracbank.com/onboarding/common/welcome",
+      "github": ""
+    },
+    {
+      "title": "Jachai",
+      "type": "Professional",
+      "duration": "Jan 2022 – Present",
+      "image": "/image/project/jachai.png",
+      "summary": "A government-integrated platform for birth certificate verification via proxy APIs. I built Angular frontend components that consume secure endpoints and validate responses.",
+      "description": "At Jachai, I worked as a Junior Software Engineer on a government-integrated platform used for birth certificate verification via proxy APIs. I was involved in developing and maintaining frontend components using Angular. My responsibilities included consuming secure API endpoints, handling response validations, and ensuring reliable communication between client and server systems. This role enhanced my understanding of secure data handling, API-driven architectures, and real-world application of digital identity verification in government services.",
+      "tech": [
+        "Angular",
+        ".NET",
+        "SQL",
+        "Stored Procedures",
+        "Redux"
+      ],
+      "accent": "#8b5cf6",
+      "live": "",
+      "github": ""
+    }
+  ],
+  "experiences": [
+    {
+      "role": "Frontend Developer",
+      "company": "Redlime Solutions",
+      "duration": "November 2025 – Present",
+      "type": "Full-time",
+      "accent": "#3b82f6",
+      "responsibilities": [
+        "Built and maintained responsive web applications using React and Next.js",
+        "Led UI/UX redesign initiatives resulting in 40% improved user engagement",
+        "Collaborated with backend teams to integrate RESTful APIs",
+        "Implemented GSAP animations and interactive user experiences"
+      ],
+      "tech": [
+        "React",
+        "Next.js",
+        "Angular",
+        "TypeScript",
+        "JavaScript",
+        "Astro",
+        "Bootstrap",
+        "Tailwind CSS",
+        "Animation"
+      ]
+    },
+    {
+      "role": "Junior Web Developer",
+      "company": "Gigatech Limited",
+      "duration": "February 2023 – November 2025",
+      "type": "Full-time",
+      "accent": "#8b5cf6",
+      "responsibilities": [
+        "Developed responsive landing pages and marketing websites for clients",
+        "Worked with design teams to translate Figma mockups into pixel-perfect code",
+        "Optimized website performance and improved load times by 30%"
+      ],
+      "tech": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Bootstrap",
+        "Angular",
+        "React"
+      ]
+    },
+    {
+      "role": "Web Development Intern",
+      "company": "Gigatech Limited",
+      "duration": "November 2022 – January 2023",
+      "type": "Internship",
+      "accent": "#06b6d4",
+      "responsibilities": [
+        "Assisted in building internal dashboard interfaces using React",
+        "Gained hands-on experience with Git workflows and agile development",
+        "Created reusable component libraries for the front-end team"
+      ],
+      "tech": [
+        "Python",
+        "Django",
+        "JavaScript"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science (B.Sc.) in Computer Science & Engineering",
+      "university": "Bangladesh University of Business and Technology (BUBT), Dhaka",
+      "duration": "2018 – 2022",
+      "status": "Completed 2022",
+      "grade": "3.74 / 4.00",
+      "gradeLabel": "CGPA",
+      "description": "I completed my Bachelor's degree in Computer Science and Engineering at BUBT – Bangladesh University of Business and Technology, Dhaka.",
+      "accent": "#3b82f6"
+    },
+    {
+      "degree": "Higher Secondary Certificate (HSC), Science",
+      "university": "Chuadanga Government College, Chuadanga",
+      "duration": "2014 – 2016",
+      "status": "Completed 2016",
+      "grade": "4.42 / 5.00",
+      "gradeLabel": "GPA",
+      "description": "I completed my class 12 higher secondary education at Chuadanga Government College, Chuadanga, where I studied Science.",
+      "accent": "#8b5cf6"
+    },
+    {
+      "degree": "Secondary School Certificate (SSC), Science",
+      "university": "Victoria Jubilee High School, Chuadanga",
+      "grade": "5.00 / 5.00",
+      "gradeLabel": "GPA",
+      "description": "I completed my class 10 secondary education at Victoria Jubilee High School, Chuadanga, where I studied Science.",
+      "accent": "#06b6d4"
+    }
+  ],
+  "papers": [
+    {
+      "title": "A Deep Learning Based Smartphone Application for Detecting Mango Diseases and Pesticide Suggestions",
+      "duration": "May 2023",
+      "image": "/image/paper/Mango_Disease_Detection.png",
+      "description": "This paper has proposed a new machine learning to classify diseases, insects, and their solutions. It includes a sufficient number of mango tree plants, insects, and diseases datasets with pesticide suggestions.",
+      "publisher": "IJCDS",
+      "publisherFull": "International Journal of Computing and Digital Systems",
+      "keywords": [
+        "Deep Learning",
+        "Mobile App",
+        "Agriculture"
+      ],
+      "accent": "#10B981",
+      "profile": "https://www.researchgate.net/profile/Md-Biswas-16?ev=hdr_xprf",
+      "paper": "https://www.researchgate.net/profile/Md-Rahman-40/publication/370418634_A_Deep_Learning_Based_Smartphone_Application_for_Detecting_Mango_Diseases_and_Pesticide_Suggestions/links/644f5d6b809a5350213ef10e/A-Deep-Learning-Based-Smartphone-Application-for-Detecting-Mango-Diseases-and-Pesticide-Suggestions.pdf"
+    },
+    {
+      "title": "Identifying the Signature of Suicidality : A Machine Learning Approach",
+      "duration": "June 2022",
+      "image": "/image/paper/Suicide.png",
+      "description": "This research proposes a machine learning-based prediction model in this respect. This research uses four traditional machine learning techniques to look at suicidality in various groups of people. To achieve higher levels of accuracy, we have included feature engineering in our suggested model.",
+      "publisher": "EUDL",
+      "publisherFull": "European Union Digital Library",
+      "keywords": [
+        "Machine Learning",
+        "Feature Engineering",
+        "Mental Health"
+      ],
+      "accent": "#8b5cf6",
+      "profile": "https://www.researchgate.net/profile/Md-Biswas-16?ev=hdr_xprf",
+      "paper": "https://books.google.com.bd/books?hl=en&lr=&id=CNN-EAAAQBAJ&oi=fnd&pg=PA279&dq=Identifying+the+Signature+of+Suicidality+:+A+Machine+Learning+Approach&ots=WQc7RMFMrk&sig=q1dkRQ0mitLeh-5-isKLM0HVvsc&redir_esc=y#v=onepage&q=Identifying%20the%20Signature%20of%20Suicidality%20%3A%20A%20Machine%20Learning%20Approach&f=false"
+    },
+    {
+      "title": "Lane Detection for Autonomous Vehicle Management: PHT Approach",
+      "duration": "December 2021",
+      "image": "/image/paper/Lane_Detection.png",
+      "description": "This research paper presents the design of a prototype autonomous guided vehicle which will detect and follow the lanes using the Probabilistic Hough Transform (PHT) algorithm. To do so, we convert our RGB road images into an HSV color model and then apply Gaussian smoothing to the converted grayscale image. For detection purposes, we process our region of interest (ROI) using a polygon clipping algorithm. Then, we apply Probabilistic Hough Transform upon the ROI image while setting all the parameters in our proposed lane detection algorithm.",
+      "publisher": "IEEE",
+      "publisherFull": "IEEE Xplore",
+      "keywords": [
+        "Computer Vision",
+        "Hough Transform",
+        "Autonomous Vehicles"
+      ],
+      "accent": "#3b82f6",
+      "profile": "https://www.researchgate.net/profile/Md-Biswas-16?ev=hdr_xprf",
+      "paper": "https://ieeexplore.ieee.org/abstract/document/9689883"
+    }
+  ],
+  "skillCategories": [
+    {
+      "title": "Frontend",
+      "icon": "Code",
+      "color": "var(--color-accent-blue)",
+      "skills": [
+        {
+          "name": "HTML / CSS",
+          "level": 95
+        },
+        {
+          "name": "JavaScript / TypeScript",
+          "level": 90
+        },
+        {
+          "name": "React / Next.js",
+          "level": 88
+        },
+        {
+          "name": "Tailwind CSS",
+          "level": 92
+        },
+        {
+          "name": "Angular",
+          "level": 72
+        },
+        {
+          "name": "Astro",
+          "level": 70
+        },
+        {
+          "name": "GSAP",
+          "level": 80
+        }
+      ]
+    },
+    {
+      "title": "Backend",
+      "icon": "Database",
+      "color": "var(--color-accent-purple)",
+      "skills": [
+        {
+          "name": "Node.js",
+          "level": 80
+        },
+        {
+          "name": "Express.js",
+          "level": 78
+        },
+        {
+          "name": "REST APIs",
+          "level": 85
+        }
+      ]
+    },
+    {
+      "title": "Tools & DevOps",
+      "icon": "Cpu",
+      "color": "var(--color-accent-cyan)",
+      "skills": [
+        {
+          "name": "Git / GitHub",
+          "level": 90
+        },
+        {
+          "name": "Figma",
+          "level": 75
+        },
+        {
+          "name": "VS Code",
+          "level": 95
+        },
+        {
+          "name": "Bootstrap",
+          "level": 85
+        }
+      ]
+    },
+    {
+      "title": "Research / Academic",
+      "icon": "BookOpen",
+      "color": "#F59E0B",
+      "skills": [
+        {
+          "name": "Data Analysis",
+          "level": 78
+        },
+        {
+          "name": "Machine Learning",
+          "level": 70
+        },
+        {
+          "name": "Research Writing",
+          "level": 82
+        }
+      ]
+    }
+  ],
+  "techBadges": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Angular",
+    "Astro",
+    "Tailwind CSS",
+    "Bootstrap",
+    "GSAP",
+    "Node.js",
+    "Express",
+    "Git",
+    "GitHub",
+    "Figma",
+    "Data Analysis",
+    "Machine Learning",
+    "Research Writing",
+    "VS Code"
+  ],
+  "stats": [
+    {
+      "value": "3+",
+      "label": "Years Experience",
+      "icon": "Briefcase"
+    },
+    {
+      "value": "20+",
+      "label": "Projects Completed",
+      "icon": "Code"
+    },
+    {
+      "value": "3+",
+      "label": "Research Papers",
+      "icon": "FileText"
+    },
+    {
+      "value": "10+",
+      "label": "Technologies Mastered",
+      "icon": "Globe"
+    }
+  ],
+  "researchGateProfile": "https://www.researchgate.net/profile/Md-Biswas-16?ev=hdr_xprf"
+}

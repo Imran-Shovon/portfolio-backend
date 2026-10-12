@@ -1,4 +1,9 @@
 node_modules/
+dist/
+coverage/
+uploads/
 .env
-.DS_Store
-npm-debug.log*
+.env.*
+!.env.example
+*.log
+.mongo-data/
