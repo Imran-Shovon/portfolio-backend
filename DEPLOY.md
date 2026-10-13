@@ -4,7 +4,7 @@
 
 | Piece | Where | URL |
 |---|---|---|
-| Portfolio website | Vercel project `portfolio` | https://portfolio-five-iota-cwznbgwsf2.vercel.app |
+| Portfolio website | Vercel project `portfolio` | https://shovonbiswas.vercel.app (the old `portfolio-five-iota-cwznbgwsf2.vercel.app` redirects here) |
 | Admin dashboard | Vercel project `portfolio-admin` | https://shovon-portfolio-admin.vercel.app |
 | Content API (this repo) | Vercel project `portfolio-api` (serverless, `api/index.js` + `vercel.json`) | https://shovon-portfolio-api.vercel.app |
 | Database | MongoDB Atlas, project `portfolio`, free M0 cluster `portfolio-db` (AWS Singapore) | — |
